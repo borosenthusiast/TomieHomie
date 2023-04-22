@@ -1,37 +1,11 @@
-# DalamudPluginProjectTemplate
-An opinionated Visual Studio project template for Dalamud plugins, with attributes for more maintainable command setup and teardown.
+# TomeHome
+u want your computer to tell u what to do today to grind tomes? Look no further!
 
-## Hint paths
-The project file includes hint paths for the dependencies, which are set up to not include much information about the developer's filesystem.
-You may need to adjust these paths yourself, if they don't represent your development environment.
+anyways im lazy so heres chatGPT
+When it comes to grinding for Moogle Tomes in Final Fantasy XIV online, it's important to focus on dungeons that offer the most irregualr tomestones of mendacity. Based on the list provided, The Tower at Paradigm's Breach and The Praetorium offer the highest amount of irregular tomestones of mendacity at 7 each. Additionally, The Puppets' Bunker and Castrum Meridianum offer a respectable 6 and 4 irregular tomestones of mendacity, respectively.
 
-## Attributes
-This template includes an attribute framework reminiscent of [Discord.Net](https://github.com/discord-net/Discord.Net).
+To maximize your Moogle Tome grinding efforts, consider running these dungeons daily through roulettes or with a dedicated group of players. Additionally, you can supplement your efforts by participating in FATEs and weekly rewards, as mentioned in the previous blurb.
 
-```csharp
-[Command("/example1")]
-[Aliases("/ex1", "/e1")]
-[HelpMessage("Example help message.")]
-public void ExampleCommand1(string command, string args)
-{
-    var chat = this.pluginInterface.Framework.Gui.Chat;
-    var world = this.pluginInterface.ClientState.LocalPlayer.CurrentWorld.GameData;
-    chat.Print($"Hello {world.Name}!");
-    PluginLog.Log("Message sent successfully.");
-}
+By focusing on these dungeons and consistently running them, you can accumulate a significant amount of Moogle Tomes to purchase high-level gear and items in Final Fantasy XIV.
 
-[Command("/example2")]
-[DoNotShowInHelp]
-public void ExampleCommand2(string command, string args)
-{
-    // do nothing
-}
-```
-
-This automatically registers and unregisters the methods that they're attached to on initialization and dispose.
-
-## GitHub Actions
-Running the shell script `DownloadGithubActions.sh` will download some useful GitHub actions for you. You can also delete this file if you have no need for it.
-
-### Current Actions
-  * dotnet build/test
+#Wow that was completely off the mark. That's why this plogon exists!
