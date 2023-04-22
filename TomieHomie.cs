@@ -8,7 +8,7 @@ using TomieHomie.Attributes;
 using System;
 using Dalamud.Data;
 using Dalamud.IoC;
-using DataManger;
+
 
 namespace TomieHomie
 {

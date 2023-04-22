@@ -18,6 +18,15 @@ namespace TomieHomie.DataManager
             this.path = path;
             this.capacity = capacity;
         }
+        
+        private string formatOutput(string results)
+        {
+            string formattedResults = results;
+
+
+
+            return formattedResults;
+        }
 
         public string loadPythonOutput()
         {

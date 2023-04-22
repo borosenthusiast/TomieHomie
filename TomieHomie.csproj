@@ -13,6 +13,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="DalamudPackager" Version="2.1.6" />
+		<PackageReference Include="IronPython" Version="3.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
