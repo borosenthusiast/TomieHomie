@@ -26,10 +26,10 @@ namespace TomieHomie.DataManager
             scope.SetVariable("capacity", capacity);
             engine.ExecuteFile(path, scope);
 
-            var dungeons = scope.GetVariable("dungeons");
+            // Example string {'Hullbreaker Isle': {'run_times': 1, 'total_time': 14}, 'The Tam-Tara Deepcroft (Hard)': {'run_times': 17, 'total_time': 221}}
             var results = scope.GetVariable("results");
 
-            return "Dungeons to run today: " + dungeons.ToString() + " " + results.ToString() + " amount of times in a play session of " + capacity + " minutes!"; 
+            return results.ToString() + " amount of times in a play session of " + capacity + " minutes!"; 
 
             
         }
