@@ -4,24 +4,33 @@ using Dalamud.Game.Gui;
 using Dalamud.Interface.Windowing;
 using Dalamud.Logging;
 using Dalamud.Plugin;
-using DalamudPluginProjectTemplate.Attributes;
+using TomieHomie.Attributes;
 using System;
+using Dalamud.Data;
+using Dalamud.IoC;
+using DataManger;
 
-namespace DalamudPluginProjectTemplate
+namespace TomieHomie
 {
-    public class Plugin : IDalamudPlugin
+    public class TomieHomie : IDalamudPlugin
     {
         private readonly DalamudPluginInterface pluginInterface;
         private readonly ChatGui chat;
         private readonly ClientState clientState;
 
-        private readonly PluginCommandManager<Plugin> commandManager;
+        private readonly PluginCommandManager<TomieHomie> commandManager;
         private readonly Configuration config;
         private readonly WindowSystem windowSystem;
 
-        public string Name => "Your Plugin's Display Name";
+        public string Name => "TomeHome";
 
-        public Plugin(
+        [PluginService] public static DalamudPluginInterface PluginInterface { get; set; } = null!;
+        [PluginService] public static PythonLoader Data { get; set; } = null!;
+        [PluginService] public static ClientState ClientState { get; set; } = null!;
+        [PluginService] public static Dalamud.Game.Command.CommandManager Commands { get; set; } = null!;
+        [PluginService] public static ChatGui Chat { get; set; } = null!;
+
+        public TomieHomie(
             DalamudPluginInterface pi,
             CommandManager commands,
             ChatGui chat,
@@ -36,7 +45,7 @@ namespace DalamudPluginProjectTemplate
                           ?? this.pluginInterface.Create<Configuration>();
 
             // Initialize the UI
-            this.windowSystem = new WindowSystem(typeof(Plugin).AssemblyQualifiedName);
+            this.windowSystem = new WindowSystem(typeof(TomieHomie).AssemblyQualifiedName);
 
             var window = this.pluginInterface.Create<PluginWindow>();
             if (window is not null)
@@ -44,10 +53,10 @@ namespace DalamudPluginProjectTemplate
                 this.windowSystem.AddWindow(window);
             }
 
-            this.pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
+            //this.pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
 
             // Load all of our commands
-            this.commandManager = new PluginCommandManager<Plugin>(this, commands);
+            this.commandManager = new PluginCommandManager<TomieHomie>(this, commands);
         }
 
         [Command("/example1")]

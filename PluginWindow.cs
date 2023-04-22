@@ -2,7 +2,7 @@
 using ImGuiNET;
 using System.Numerics;
 
-namespace DalamudPluginProjectTemplate
+namespace TomieHomie
 {
     public class PluginWindow : Window
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DalamudPluginProjectTemplate
+namespace TomieHomie
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class DoNotShowInHelpAttribute : Attribute

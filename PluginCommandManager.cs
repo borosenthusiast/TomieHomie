@@ -1,12 +1,12 @@
 ﻿using Dalamud.Game.Command;
-using DalamudPluginProjectTemplate.Attributes;
+using TomieHomie.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using static Dalamud.Game.Command.CommandInfo;
 
-namespace DalamudPluginProjectTemplate
+namespace TomieHomie
 {
     public class PluginCommandManager<THost> : IDisposable
     {

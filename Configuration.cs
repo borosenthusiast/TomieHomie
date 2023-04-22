@@ -1,7 +1,7 @@
 ﻿using Dalamud.Configuration;
 using Dalamud.Plugin;
 
-namespace DalamudPluginProjectTemplate
+namespace TomieHomie
 {
     public class Configuration : IPluginConfiguration
     {

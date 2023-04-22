@@ -1,6 +1,6 @@
 using System;
 
-namespace DalamudPluginProjectTemplate.Attributes
+namespace TomieHomie.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class CommandAttribute : Attribute
