@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
 
 namespace TomieHomie.DataManager
 {
 
-    internal class PythonLoader
+    public class PythonLoader
     {
         private string path;
         private int capacity;
@@ -19,20 +14,16 @@ namespace TomieHomie.DataManager
             this.capacity = capacity;
         }
         
-        private string formatOutput(string results)
-        {
-            string formattedResults = results;
-
-
-
-            return formattedResults;
-        }
 
         public string loadPythonOutput()
         {
             var engine = Python.CreateEngine();          
             dynamic scope = engine.CreateScope();
-            scope.SetVariable("capacity", capacity);
+            List<string> argv = new List<string>
+            {
+                capacity.ToString()
+            };
+            engine.GetSysModule().SetVariable("argv", argv);
             engine.ExecuteFile(path, scope);
 
             // Example string {'Hullbreaker Isle': {'run_times': 1, 'total_time': 14}, 'The Tam-Tara Deepcroft (Hard)': {'run_times': 17, 'total_time': 221}}
