@@ -21,7 +21,6 @@ namespace TomieHomie.Plugin
         private readonly WindowSystem windowSystem;
 
         public string Name => "TomeHome";
-
         [PluginService] public static DalamudPluginInterface PluginInterface { get; set; } = null!;
         //[PluginService] public static PythonLoader Data { get; set; } = null!;
         [PluginService] public static ClientState ClientState { get; set; } = null!;
@@ -37,7 +36,7 @@ namespace TomieHomie.Plugin
             pluginInterface = pi;
             this.chat = chat;
             this.clientState = clientState;
-            Managers.CommandManager.load();
+            CommandManager.Load();
             // Get or create a configuration object
             config = (Configuration)pluginInterface.GetPluginConfig()
                           ?? pluginInterface.Create<Configuration>();
@@ -70,7 +69,7 @@ namespace TomieHomie.Plugin
         public void Dispose()
         {
             Dispose(true);
-            Managers.CommandManager.unload();
+            CommandManager.Unload();
             GC.SuppressFinalize(this);
 
         }

@@ -6,21 +6,24 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using Lumina.Excel.GeneratedSheets;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace TomieHomie.Managers
 {
     public static class CommandManager
     {
-
         /// <summary>
         /// Sends the chat output to window.
         /// </summary>
         /// <param name="cmd"></param>
         /// <param name="arg"></param>
-        private static void CommandHandler(string cmd, string arg)
+        private static async void CommandHandler(string cmd, string arg)
         {
             string outputLog = string.Empty;
             int capacity;
+            Plugin.TomieHomie.Chat.Print(TomieHomieConstants.CALC);
             try
             {
                 capacity = int.Parse(arg);
@@ -36,8 +39,9 @@ namespace TomieHomie.Managers
             }
             try
             {
-                TomieHomie.DataManager.PythonLoader pyLoader = new TomieHomie.DataManager.PythonLoader(TomieHomieConstants.PATH, capacity);
-                outputLog = pyLoader.loadPythonOutput();
+                PythonLoader pyLoader = new PythonLoader(capacity);
+                await pyLoader.LoadPythonOutput();
+                outputLog = pyLoader.Output;
             }
             catch
             {
@@ -49,12 +53,19 @@ namespace TomieHomie.Managers
                 Plugin.TomieHomie.Chat.Print(TomieHomieConstants.PYOUTPUTFAIL);
                 return;
             }
-            Plugin.TomieHomie.Chat.Print(outputLog);
+            string[] outputSep = outputLog.Split('\n');
+            foreach (string s in outputSep)
+            {
+                string cleaned = s.Replace("\n", "").Replace("\r", "");
+                if (s != string.Empty)
+                    Plugin.TomieHomie.Chat.Print(cleaned);
+            }
+
         }
         /// <summary>
         /// load command
         /// </summary>
-        public static void load()
+        public static void Load()
         {
             Plugin.TomieHomie.Commands.RemoveHandler(TomieHomieConstants.OUTPUTCOMMAND);
             Plugin.TomieHomie.Commands.AddHandler(TomieHomieConstants.OUTPUTCOMMAND, new CommandInfo(CommandHandler)
@@ -64,7 +75,7 @@ namespace TomieHomie.Managers
             });
         }
 
-        public static void unload()
+        public static void Unload()
         {
             Plugin.TomieHomie.Commands.RemoveHandler(TomieHomieConstants.OUTPUTCOMMAND);
         }

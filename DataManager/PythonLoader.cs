@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using IronPython.Hosting;
+﻿using System.Threading;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace TomieHomie.DataManager
 {
@@ -8,30 +9,40 @@ namespace TomieHomie.DataManager
     {
         private string path;
         private int capacity;
-        public PythonLoader(string path, int capacity)
+        private string output;
+        public string Output { get { return output; } }
+        public PythonLoader(int capacity)
         {
-            this.path = path;
+            this.path = Plugin.TomieHomie.PluginInterface.AssemblyLocation.DirectoryName + Constants.TomieHomieConstants.PATH;
             this.capacity = capacity;
         }
         
 
-        public string loadPythonOutput()
+        public async Task LoadPythonOutput()
         {
-            var engine = Python.CreateEngine();          
-            dynamic scope = engine.CreateScope();
-            List<string> argv = new List<string>
-            {
-                capacity.ToString()
-            };
-            engine.GetSysModule().SetVariable("argv", argv);
-            engine.ExecuteFile(path, scope);
+            // Set up the process start info
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = path;
+            startInfo.Arguments = capacity.ToString();
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.CreateNoWindow = true;
 
+            // Start the process
+            Process process = new Process();
+            process.StartInfo = startInfo;
+            process.Start();
+
+            // Read the output
+            string output = await process.StandardOutput.ReadToEndAsync();
+
+            // Wait for the process to exit
+            await Task.Run(process.WaitForExit);
+            this.output = output;
             // Example string {'Hullbreaker Isle': {'run_times': 1, 'total_time': 14}, 'The Tam-Tara Deepcroft (Hard)': {'run_times': 17, 'total_time': 221}}
-            var results = scope.GetVariable("results");
 
-            return results.ToString() + " amount of times in a play session of " + capacity + " minutes!"; 
 
-            
+
         }
     }
 }
