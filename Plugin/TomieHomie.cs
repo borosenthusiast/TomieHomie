@@ -1,10 +1,10 @@
 ﻿using Dalamud.Game.ClientState;
-using Dalamud.Game.Command;
 using Dalamud.Game.Gui;
 using Dalamud.Interface.Windowing;
 using Dalamud.Logging;
 using Dalamud.Plugin;
 using TomieHomie.Attributes;
+using TomieHomie.Managers;
 using System;
 using Dalamud.Data;
 using Dalamud.IoC;
@@ -17,8 +17,6 @@ namespace TomieHomie.Plugin
         private readonly DalamudPluginInterface pluginInterface;
         private readonly ChatGui chat;
         private readonly ClientState clientState;
-
-        private readonly PluginCommandManager<TomieHomie> commandManager;
         private readonly Configuration config;
         private readonly WindowSystem windowSystem;
 
@@ -27,19 +25,19 @@ namespace TomieHomie.Plugin
         [PluginService] public static DalamudPluginInterface PluginInterface { get; set; } = null!;
         //[PluginService] public static PythonLoader Data { get; set; } = null!;
         [PluginService] public static ClientState ClientState { get; set; } = null!;
-        [PluginService] public static CommandManager Commands { get; set; } = null!;
+        [PluginService] public static Dalamud.Game.Command.CommandManager Commands { get; set; } = null!;
         [PluginService] public static ChatGui Chat { get; set; } = null!;
 
         public TomieHomie(
             DalamudPluginInterface pi,
-            CommandManager commands,
+           // CommandManager commands,
             ChatGui chat,
             ClientState clientState)
         {
             pluginInterface = pi;
             this.chat = chat;
             this.clientState = clientState;
-
+            Managers.CommandManager.load();
             // Get or create a configuration object
             config = (Configuration)pluginInterface.GetPluginConfig()
                           ?? pluginInterface.Create<Configuration>();
@@ -55,38 +53,26 @@ namespace TomieHomie.Plugin
 
             //this.pluginInterface.UiBuilder.Draw += this.windowSystem.Draw;
 
-            // Load all of our commands
-            commandManager = new PluginCommandManager<TomieHomie>(this, commands);
         }
 
-        [Command("/example1")]
-        [HelpMessage("Example help message.")]
-        public void ExampleCommand1(string command, string args)
-        {
-            // You may want to assign these references to private variables for convenience.
-            // Keep in mind that the local player does not exist until after logging in.
-            var world = clientState.LocalPlayer?.CurrentWorld.GameData;
-            chat.Print($"Hello, {world?.Name}!");
-            PluginLog.Log("Message sent successfully.");
-        }
 
         #region IDisposable Support
         protected virtual void Dispose(bool disposing)
         {
             if (!disposing) return;
 
-            commandManager.Dispose();
-
             pluginInterface.SavePluginConfig(config);
 
-            pluginInterface.UiBuilder.Draw -= windowSystem.Draw;
+            //pluginInterface.UiBuilder.Draw -= windowSystem.Draw;
             windowSystem.RemoveAllWindows();
         }
 
         public void Dispose()
         {
             Dispose(true);
+            Managers.CommandManager.unload();
             GC.SuppressFinalize(this);
+
         }
         #endregion
     }
