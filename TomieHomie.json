@@ -1,7 +1,9 @@
 ﻿{
-  "Name": "Find a home for tome",
+  "Name": "TomieHomie",
   "Author": "borosenthusiast",
-  "Description": "ye ye",
-  "RepoUrl": "",
-  "Tags": []
+  "AssemblyVersion": "1.0",
+  "Description": "Find out what to run!",
+  "RepoUrl": "https://github.com/borosenthusiast/TomieHomie",
+  "Punchline": "Find out what to run!",
+  "Tags": [ "plugin", "minmaxing" ]
 }
