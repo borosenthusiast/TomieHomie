@@ -1,0 +1,20 @@
+{
+  "Author": "borosenthusiast",
+  "Name": "TomieHomie",
+  "InternalName": "TomieHomie",
+  "AssemblyVersion": "1.0.0.0",
+  "Description": "Find out what to run!",
+  "ApplicableVersion": "any",
+  "RepoUrl": "https://github.com/borosenthusiast/TomieHomie",
+  "Tags": [
+    "plugin",
+    "minmaxing"
+  ],
+  "DalamudApiLevel": 8,
+  "LoadRequiredState": 0,
+  "LoadSync": false,
+  "CanUnloadAsync": false,
+  "LoadPriority": 0,
+  "Punchline": "Find out what to run!",
+  "AcceptsFeedback": true
+}
