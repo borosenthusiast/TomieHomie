@@ -6,6 +6,9 @@
   "Description": "Find out what to run!",
   "ApplicableVersion": "any",
   "RepoUrl": "https://github.com/borosenthusiast/TomieHomie",
+  "DownloadLinkInstall": "https://media.githubusercontent.com/media/borosenthusiast/TomieHomie/main/bin/Release/net7.0-windows/TomieHomie/latest.zip",
+  "DownloadLinkTesting": "https://media.githubusercontent.com/media/borosenthusiast/TomieHomie/main/bin/Release/net7.0-windows/TomieHomie/latest.zip",
+  "DownloadLinkUpdate": "https://media.githubusercontent.com/media/borosenthusiast/TomieHomie/main/bin/Release/net7.0-windows/TomieHomie/latest.zip",
   "Tags": [
     "plugin",
     "minmaxing"
